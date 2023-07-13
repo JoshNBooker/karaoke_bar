@@ -1,6 +1,10 @@
 class Guest:
 
-    def guest(self, wallet, favourite_song):
+    def __init__(self, name, wallet, favourite_song):
+        self.name = name
         self.wallet = wallet
         self.favourite_song = favourite_song
     
+    def pay_money(self, price):
+        self.wallet -= price
+        return self.wallet
