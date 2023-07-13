@@ -7,10 +7,12 @@ from classes.song import Song
 class TestGuest(unittest.TestCase):
 
     def setUp(self):
-        self.guest1 = Guest("John", 100, "Bohemian Rhapsody")
-        self.drink1 = Drink("Tennants", 4)
-        self.room1 = Room("Red Room", 30, [self.guest1], ["Immigrant Song", "Johnny B. Goode"], 3, 100)
         self.song1 = Song("Born to Run")
+        self.song2 = Song("Master of Puppets")
+        self.song3 = Song("Seven Nation Army")
+        self.guest1 = Guest("John", 100, self.song3)
+        self.drink1 = Drink("Tennants", 4)
+        self.room1 = Room("Red Room", 30, [self.guest1], [self.song1, self.song2], 3, 100)
 
     def test_pay_money(self):
         self.guest1.pay_money(4)
@@ -24,5 +26,10 @@ class TestGuest(unittest.TestCase):
         amount = self.guest1.rent_room(self.room1)
         self.assertEqual(70, self.guest1.wallet)
         self.assertEqual(30, amount)
+    
+    def test_check_or_add_favourite_song_room_playlist(self):
+        guest_reaction = self.guest1.check_room_playlist(self.room1)
+        self.assertEqual(3, len(self.room1.songs))
+        self.assertEqual(f"Oh they don't have Seven Nation Army, I'll add it!", guest_reaction)
 
 
