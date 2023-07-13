@@ -5,6 +5,14 @@ class Guest:
         self.wallet = wallet
         self.favourite_song = favourite_song
     
-    def pay_money(self, price):
-        self.wallet -= price
+    def pay_money(self, amount):
+        self.wallet -= amount
         return self.wallet
+    
+    def buy_drink(self, drink):
+        self.pay_money(drink.price)
+        return drink.price
+    
+    def rent_room(self, room):
+        self.pay_money(room.price)
+        return room.price
